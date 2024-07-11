@@ -1,0 +1,22 @@
+{
+  "autoload": {
+    "psr-4": {
+      "MODXBuddy\\": "src/"
+    }
+  },
+  "require": {
+    "php": ">=7.4",
+    "scr34m/php-malware-scanner": "^1.0",
+    "matdave/modxpackage": "dev-main"
+  },
+  "require-dev": {
+    "modx/revolution": "^3.0"
+  },
+  "config": {
+    "platform": {
+      "php": "7.4"
+    }
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
+}

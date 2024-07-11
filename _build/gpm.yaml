@@ -1,0 +1,10 @@
+name: MODXBuddy
+version: 0.0.1
+lowCaseName: modxbuddy
+namespace: MODXBuddy
+description: 'Helper tool for MODX'
+author: matdave
+menus:
+    -
+        text: modxbuddy.menu
+        action: manage

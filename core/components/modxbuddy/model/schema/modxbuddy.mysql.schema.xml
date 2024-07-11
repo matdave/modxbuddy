@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model package="modxbuddy" baseClass="xPDOSimpleObject" platform="mysql" defaultEngine="InnoDB" version="2.0">
+
+</model>

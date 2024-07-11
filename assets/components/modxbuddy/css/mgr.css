@@ -1,0 +1,11 @@
+.invalid {
+    border-color: #c10808;
+    color: #c10808;
+}
+.valid {
+    color: #059505;
+}
+
+.isokay {
+    color: #dd740b;
+}
