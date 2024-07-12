@@ -1,5 +1,5 @@
 name: MODXBuddy
-version: 0.0.1
+version: 1.0.0
 lowCaseName: modxbuddy
 namespace: MODXBuddy
 description: 'Helper tool for MODX'
@@ -8,3 +8,33 @@ menus:
     -
         text: modxbuddy.menu
         action: manage
+        permission: settings
+systemSettings:
+    -
+        key: anonymous_sessions
+        value: 1
+        type: combo-boolean
+    -
+        key: disable_warnings
+        value: 1
+        type: combo-boolean
+    -
+        key: upload_scan
+        value: 1
+        type: combo-boolean
+    -
+        key: upload_resize
+        value: 1
+        type: combo-boolean
+    -
+        key: image_resize_max_dimension
+        value: 1920
+        type: number
+plugins:
+    -
+        name: MODXBuddy
+        file: modxbuddy.php
+        events:
+            - OnFileManagerBeforeUpload
+            - OnFileManagerUpload
+            - OnMODXInit

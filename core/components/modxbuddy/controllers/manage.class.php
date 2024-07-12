@@ -15,9 +15,9 @@ class MODXBuddyManageManagerController extends MODXBuddyBaseManagerController
 
     public function loadCustomCssJs(): void
     {
-        $this->addLastJavascript($this->modxbuddy->getOption('jsUrl') . 'mgr/widgets/manage.panel.js');
-        $this->addLastJavascript($this->modxbuddy->getOption('jsUrl') . 'mgr/sections/manage.js');
-        $this->addLastJavascript($this->modxbuddy->getOption('jsUrl') . 'mgr/utils/combo.js');
+        $this->addLastJavascript($this->modxbuddy->getOption('jsUrl') . 'mgr/widgets/manage.panel.js?v=' . $this->modxbuddy::VERSION);
+        $this->addLastJavascript($this->modxbuddy->getOption('jsUrl') . 'mgr/sections/manage.js?v=' . $this->modxbuddy::VERSION);
+        $this->addLastJavascript($this->modxbuddy->getOption('jsUrl') . 'mgr/utils/combo.js?v=' . $this->modxbuddy::VERSION);
 
         $this->addHtml(
             '

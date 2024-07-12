@@ -1,6 +1,6 @@
 # MODX Buddy
 
-MODX Buddy is a tool to help with setup, security and performance of your site.
+MODX Buddy is a tool to help with setup security and performance of your site.
 
 ## Features
 

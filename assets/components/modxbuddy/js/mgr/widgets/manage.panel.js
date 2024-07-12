@@ -22,7 +22,7 @@ modxbuddy.panel.Manage = function (config) {
                 items: [
                     {
                         layout: 'form',
-                        title: _('system_settings'),
+                        title: _('modxbuddy.tab.system'),
                         items: [
                             {
                                 html: _('modxbuddy.manage.system_settings'),
@@ -67,6 +67,233 @@ modxbuddy.panel.Manage = function (config) {
                                             }
                                         }
                                     }, {
+                                        xtype: 'combo-boolean',
+                                        fieldLabel: _('modxbuddy.setting_friendly_urls') + ' <i style="font-weight: normal">(' + _('setting_friendly_urls') + ')</i>',
+                                        name: 'friendly_urls',
+                                        cls: MODx.config.friendly_urls === '1' ? 'valid' : 'invalid',
+                                        value: MODx.config.friendly_urls,
+                                        listeners: {
+                                            'change': function (field, value) {
+                                                if (value === '1' || value === true) {
+                                                    field.removeClass('invalid');
+                                                    field.addClass('valid');
+                                                } else {
+                                                    field.removeClass('valid');
+                                                    field.addClass('invalid');
+                                                }
+                                                MODx.Ajax.request({
+                                                    url: modxbuddy.config.connectorUrl,
+                                                    params: {
+                                                        action: 'MODXBuddy\\Processors\\Settings\\Update',
+                                                        field: 'friendly_urls',
+                                                        value: value
+                                                    },
+                                                });
+                                            }
+                                        }
+                                    }, {
+                                        xtype: 'combo-boolean',
+                                        fieldLabel: _('modxbuddy.setting_use_alias_path') + ' <i style="font-weight: normal">(' + _('setting_use_alias_path') + ')</i>',
+                                        name: 'use_alias_path',
+                                        cls: MODx.config.use_alias_path === '1' ? 'valid' : 'invalid',
+                                        value: MODx.config.use_alias_path,
+                                        listeners: {
+                                            'change': function (field, value) {
+                                                if (value === '1' || value === true) {
+                                                    field.removeClass('invalid');
+                                                    field.addClass('valid');
+                                                } else {
+                                                    field.removeClass('valid');
+                                                    field.addClass('invalid');
+                                                }
+                                                MODx.Ajax.request({
+                                                    url: modxbuddy.config.connectorUrl,
+                                                    params: {
+                                                        action: 'MODXBuddy\\Processors\\Settings\\Update',
+                                                        field: 'use_alias_path',
+                                                        value: value
+                                                    },
+                                                });
+                                            }
+                                        }
+                                    },
+                                ]
+                            }
+                        ]
+                    },{
+                        layout: 'form',
+                        title: _('modxbuddy.tab.performance'),
+                        items: [
+                            {
+                                html: _('modxbuddy.manage.performance_settings'),
+                                cls: 'panel-desc'
+                            },
+                            {
+                                layout: 'form',
+                                defaults: {
+                                    msgTarget: 'under',
+                                    border: false,
+                                    anchor: '100%',
+                                    layout: 'form',
+                                    defaultType: 'textfield',
+                                    autoHeight: true,
+                                },
+                                labelAlign: 'top',
+                                cls: 'main-wrapper',
+                                items: [
+                                    {
+                                        xtype: 'combo-boolean',
+                                        fieldLabel: _('modxbuddy.setting_anonymous_sessions') + ' <i style="font-weight: normal">(' + _('setting_anonymous_sessions') + ')</i>',
+                                        name: 'anonymous_sessions',
+                                        cls: MODx.config['modxbuddy.anonymous_sessions'] === '0' ? 'valid' : 'isokay',
+                                        value: MODx.config['modxbuddy.anonymous_sessions'],
+                                        listeners: {
+                                            'change': function (field, value) {
+                                                if (value === '1' || value === true) {
+                                                    field.removeClass('valid');
+                                                    field.addClass('isokay');
+                                                } else {
+                                                    field.removeClass('isokay');
+                                                    field.addClass('valid');
+                                                }
+                                                MODx.Ajax.request({
+                                                    url: modxbuddy.config.connectorUrl,
+                                                    params: {
+                                                        action: 'MODXBuddy\\Processors\\Settings\\Update',
+                                                        field: 'anonymous_sessions',
+                                                        value: value
+                                                    },
+                                                });
+                                            }
+                                        }
+                                    },{
+                                        xtype: 'combo-boolean',
+                                        fieldLabel: _('setting_modxbuddy.upload_resize_desc') + ' <i style="font-weight: normal">(' + _('setting_modxbuddy.upload_resize') + ')</i>',
+                                        name: 'modxbuddy.upload_resize',
+                                        cls: MODx.config['modxbuddy.upload_resize'] === '1' ? 'valid' : 'invalid',
+                                        value: MODx.config['modxbuddy.upload_resize'],
+                                        listeners: {
+                                            'change': function (field, value) {
+                                                if (value === '1' || value === true) {
+                                                    field.removeClass('valid');
+                                                    field.addClass('invalid');
+                                                } else {
+                                                    field.removeClass('invalid');
+                                                    field.addClass('valid');
+                                                }
+                                                MODx.Ajax.request({
+                                                    url: modxbuddy.config.connectorUrl,
+                                                    params: {
+                                                        action: 'MODXBuddy\\Processors\\Settings\\Update',
+                                                        field: 'modxbuddy.upload_resize',
+                                                        value: value
+                                                    },
+                                                });
+                                            }
+                                        }
+                                    }, {
+                                        xtype: 'numberfield',
+                                        fieldLabel: _('setting_modxbuddy.image_resize_max_dimension_desc') + ' <i style="font-weight: normal">(' + _('setting_modxbuddy.image_resize_max_dimension') + ')</i>',
+                                        name: 'modxbuddy.image_resize_max_dimension',
+                                        cls: parseInt(MODx.config['modxbuddy.image_resize_max_dimension']) > 0 ? 'valid' : 'invalid',
+                                        value: parseInt(MODx.config['modxbuddy.image_resize_max_dimension']),
+                                        allowNegative: false,
+                                        allowDecimals: false,
+                                        listeners: {
+                                            'change': function (field, value) {
+                                                if (value > 0) {
+                                                    field.removeClass('invalid');
+                                                    field.addClass('valid');
+                                                } else {
+                                                    field.removeClass('valid');
+                                                    field.addClass('invalid');
+                                                }
+                                                MODx.Ajax.request({
+                                                    url: modxbuddy.config.connectorUrl,
+                                                    params: {
+                                                        action: 'MODXBuddy\\Processors\\Settings\\Update',
+                                                        field: 'modxbuddy.image_resize_max_dimension',
+                                                        value: value
+                                                    },
+                                                });
+                                            }
+                                        }
+                                    }, {
+                                        xtype: 'modxbuddy-combo-sessionmanager',
+                                        fieldLabel: _('modxbuddy.setting_session_handler_class') + ' <i style="font-weight: normal">(' + _('setting_session_handler_class') + ')</i>',
+                                        name: 'session_handler_class',
+                                        cls: MODx.config.session_handler_class === '' ? 'valid' : 'isokay',
+                                        value: MODx.config.session_handler_class,
+                                        listeners: {
+                                            'change': function (field, value) {
+                                                if (value) {
+                                                    field.removeClass('valid');
+                                                    field.addClass('isokay');
+                                                } else {
+                                                    field.removeClass('isokay');
+                                                    field.addClass('valid');
+                                                }
+                                                MODx.Ajax.request({
+                                                    url: modxbuddy.config.connectorUrl,
+                                                    params: {
+                                                        action: 'MODXBuddy\\Processors\\Settings\\Update',
+                                                        field: 'session_handler_class',
+                                                        value: value
+                                                    },
+                                                });
+                                            }
+                                        }
+                                    }, {
+                                        xtype: 'combo-boolean',
+                                        fieldLabel: _('setting_modxbuddy.disable_warnings_desc') + ' <i style="font-weight: normal">(' + _('setting_modxbuddy.disable_warnings') + ')</i>',
+                                        name: 'modxbuddy.disable_warnings',
+                                        cls: MODx.config['modxbuddy.disable_warnings'] === '1' ? 'valid' : 'invalid',
+                                        value: MODx.config['modxbuddy.disable_warnings'],
+                                        listeners: {
+                                            'change': function (field, value) {
+                                                if (value === '1' || value === true) {
+                                                    field.removeClass('invalid');
+                                                    field.addClass('valid');
+                                                } else {
+                                                    field.removeClass('valid');
+                                                    field.addClass('invalid');
+                                                }
+                                                MODx.Ajax.request({
+                                                    url: modxbuddy.config.connectorUrl,
+                                                    params: {
+                                                        action: 'MODXBuddy\\Processors\\Settings\\Update',
+                                                        field: 'modxbuddy.disable_warnings',
+                                                        value: value
+                                                    },
+                                                });
+                                            }
+                                        }
+                                    },
+                                ]
+                            }
+                        ]
+                    },{
+                        layout: 'form',
+                        title: _('modxbuddy.tab.security'),
+                        items: [
+                            {
+                                html: _('modxbuddy.manage.security_settings'),
+                                cls: 'panel-desc'
+                            },
+                            {
+                                layout: 'form',
+                                defaults: {
+                                    msgTarget: 'under',
+                                    border: false,
+                                    anchor: '100%',
+                                    layout: 'form',
+                                    defaultType: 'textfield',
+                                    autoHeight: true,
+                                },
+                                labelAlign: 'top',
+                                cls: 'main-wrapper',
+                                items: [
+                                    {
                                         xtype: 'combo-boolean',
                                         fieldLabel: _('modxbuddy.setting_session_cookie_httponly') + ' <i style="font-weight: normal">(' + _('setting_session_cookie_httponly') + ')</i>',
                                         name: 'session_cookie_httponly',
@@ -143,10 +370,35 @@ modxbuddy.panel.Manage = function (config) {
                                         }
                                     }, {
                                         xtype: 'combo-boolean',
-                                        fieldLabel: _('modxbuddy.setting_anonymous_sessions') + ' <i style="font-weight: normal">(' + _('setting_anonymous_sessions') + ')</i>',
-                                        name: 'anonymous_sessions',
-                                        cls: MODx.config['modxbuddy.anonymous_sessions'] === '0' ? 'valid' : 'isokay',
-                                        value: MODx.config['modxbuddy.anonymous_sessions'],
+                                        fieldLabel: _('setting_modxbuddy.upload_scan_desc') + ' <i style="font-weight: normal">(' + _('setting_modxbuddy.upload_scan') + ')</i>',
+                                        name: 'modxbuddy.upload_scan',
+                                        cls: MODx.config['modxbuddy.upload_scan'] === '1' ? 'valid' : 'invalid',
+                                        value: MODx.config['modxbuddy.upload_scan'],
+                                        listeners: {
+                                            'change': function (field, value) {
+                                                if (value === '1' || value === true) {
+                                                    field.removeClass('valid');
+                                                    field.addClass('invalid');
+                                                } else {
+                                                    field.removeClass('invalid');
+                                                    field.addClass('valid');
+                                                }
+                                                MODx.Ajax.request({
+                                                    url: modxbuddy.config.connectorUrl,
+                                                    params: {
+                                                        action: 'MODXBuddy\\Processors\\Settings\\Update',
+                                                        field: 'modxbuddy.upload_scan',
+                                                        value: value
+                                                    },
+                                                });
+                                            }
+                                        }
+                                    }, {
+                                        xtype: 'combo-boolean',
+                                        fieldLabel: _('setting_cache_alias_map_desc') + ' <i style="font-weight: normal">(' + _('setting_cache_alias_map') + ')</i>',
+                                        name: 'cache_alias_map',
+                                        value: MODx.config.cache_alias_map,
+                                        cls: MODx.config.cache_alias_map === '1' ? 'isokay' : 'valid',
                                         listeners: {
                                             'change': function (field, value) {
                                                 if (value === '1' || value === true) {
@@ -160,13 +412,13 @@ modxbuddy.panel.Manage = function (config) {
                                                     url: modxbuddy.config.connectorUrl,
                                                     params: {
                                                         action: 'MODXBuddy\\Processors\\Settings\\Update',
-                                                        field: 'anonymous_sessions',
+                                                        field: 'cache_alias_map',
                                                         value: value
                                                     },
                                                 });
                                             }
                                         }
-                                    }
+                                    },
                                 ]
                             }
                         ]

@@ -5,7 +5,7 @@ use MatDave\MODXPackage\Service;
 
 class MODXBuddy extends Service
 {
-    public const VERSION = '0.0.1';
+    public const VERSION = '1.0.0';
 
     public $namespace = 'modxbuddy';
 }

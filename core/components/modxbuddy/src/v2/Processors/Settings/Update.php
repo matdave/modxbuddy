@@ -35,11 +35,22 @@ class Update extends \modProcessor
                 $setting->set('context_key', $context->get('key'));
                 $setting->set('key', 'anonymous_sessions');
                 $setting->set('namespace', 'core');
+                $setting->set('default', 'default');
                 $setting->set('xtype', 'combo-boolean');
             }
             $setting->set('value', $value === 'true' ? 1 : 0);
             $setting->save();
         }
+        $setting = $this->modx->getObject('modSystemSetting', ['key' => 'modxbuddy.anonymous_sessions']);
+        if (!$setting) {
+            $setting = $this->modx->newObject('modSystemSetting');
+            $setting->set('key', 'modxbuddy.anonymous_sessions');
+            $setting->set('namespace', 'modxbuddy');
+            $setting->set('default', 'default');
+            $setting->set('xtype', 'combo-boolean');
+        }
+        $setting->set('value', $value === 'true' ? 1 : 0);
+        $setting->save();
 
         $this->modx->cacheManager->refresh();
         return $this->success();

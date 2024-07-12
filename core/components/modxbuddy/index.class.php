@@ -23,13 +23,14 @@ abstract class MODXBuddyBaseManagerController extends modExtraManagerController 
             );
         }
 
-        $this->addCss($this->modxbuddy->getOption('cssUrl') . 'mgr.css');
-        $this->addJavascript($this->modxbuddy->getOption('jsUrl') . 'mgr/modxbuddy.js');
+        $this->addCss($this->modxbuddy->getOption('cssUrl') . 'mgr.css?v=' . $this->modxbuddy::VERSION);
+        $this->addJavascript($this->modxbuddy->getOption('jsUrl') . 'mgr/modxbuddy.js?v=' . $this->modxbuddy::VERSION);
 
         $this->addHtml('
             <script type="text/javascript">
                 Ext.onReady(function() {
                     modxbuddy.config = '.$this->modx->toJSON($this->modxbuddy->config).';
+                    modxbuddy.config.modxVersion = '.$version.';
                 });
             </script>
         ');
