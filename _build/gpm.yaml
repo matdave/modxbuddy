@@ -1,5 +1,5 @@
 name: MODXBuddy
-version: 1.0.0
+version: 1.0.1
 lowCaseName: modxbuddy
 namespace: MODXBuddy
 description: 'Helper tool for MODX'
@@ -7,6 +7,7 @@ author: matdave
 menus:
     -
         text: modxbuddy.menu
+        description: modxbuddy.menu_desc
         action: manage
         permission: settings
 systemSettings:

@@ -38,7 +38,7 @@ class Update extends \modProcessor
                 $setting->set('default', 'default');
                 $setting->set('xtype', 'combo-boolean');
             }
-            $setting->set('value', $value === 'true' ? 1 : 0);
+            $setting->set('value', $value === 'true' ? '1' : '0');
             $setting->save();
         }
         $setting = $this->modx->getObject('modSystemSetting', ['key' => 'modxbuddy.anonymous_sessions']);
@@ -49,7 +49,7 @@ class Update extends \modProcessor
             $setting->set('default', 'default');
             $setting->set('xtype', 'combo-boolean');
         }
-        $setting->set('value', $value === 'true' ? 1 : 0);
+        $setting->set('value', $value === 'true' ? '1' : '0');
         $setting->save();
 
         $this->modx->cacheManager->refresh();

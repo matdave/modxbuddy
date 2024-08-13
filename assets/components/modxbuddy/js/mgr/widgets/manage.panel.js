@@ -86,7 +86,7 @@ modxbuddy.panel.Manage = function (config) {
                                                     params: {
                                                         action: 'MODXBuddy\\Processors\\Settings\\Update',
                                                         field: 'friendly_urls',
-                                                        value: value
+                                                        value: value ? '1' : '0'
                                                     },
                                                 });
                                             }
@@ -111,7 +111,7 @@ modxbuddy.panel.Manage = function (config) {
                                                     params: {
                                                         action: 'MODXBuddy\\Processors\\Settings\\Update',
                                                         field: 'use_alias_path',
-                                                        value: value
+                                                        value:  value ? '1' : '0'
                                                     },
                                                 });
                                             }
@@ -161,7 +161,7 @@ modxbuddy.panel.Manage = function (config) {
                                                     params: {
                                                         action: 'MODXBuddy\\Processors\\Settings\\Update',
                                                         field: 'anonymous_sessions',
-                                                        value: value
+                                                        value:  value ? '1' : '0'
                                                     },
                                                 });
                                             }
@@ -186,7 +186,7 @@ modxbuddy.panel.Manage = function (config) {
                                                     params: {
                                                         action: 'MODXBuddy\\Processors\\Settings\\Update',
                                                         field: 'modxbuddy.upload_resize',
-                                                        value: value
+                                                        value:  value ? '1' : '0'
                                                     },
                                                 });
                                             }
@@ -263,7 +263,7 @@ modxbuddy.panel.Manage = function (config) {
                                                     params: {
                                                         action: 'MODXBuddy\\Processors\\Settings\\Update',
                                                         field: 'modxbuddy.disable_warnings',
-                                                        value: value
+                                                        value:  value ? '1' : '0'
                                                     },
                                                 });
                                             }
@@ -313,7 +313,7 @@ modxbuddy.panel.Manage = function (config) {
                                                     params: {
                                                         action: 'MODXBuddy\\Processors\\Settings\\Update',
                                                         field: 'session_cookie_httponly',
-                                                        value: value
+                                                        value:  value ? '1' : '0'
                                                     },
                                                 });
                                             }
@@ -338,7 +338,7 @@ modxbuddy.panel.Manage = function (config) {
                                                     params: {
                                                         action: 'MODXBuddy\\Processors\\Settings\\Update',
                                                         field: 'session_cookie_secure',
-                                                        value: value
+                                                        value:  value ? '1' : '0'
                                                     },
                                                 });
                                             }
@@ -388,7 +388,7 @@ modxbuddy.panel.Manage = function (config) {
                                                     params: {
                                                         action: 'MODXBuddy\\Processors\\Settings\\Update',
                                                         field: 'modxbuddy.upload_scan',
-                                                        value: value
+                                                        value:  value ? '1' : '0'
                                                     },
                                                 });
                                             }
@@ -413,7 +413,7 @@ modxbuddy.panel.Manage = function (config) {
                                                     params: {
                                                         action: 'MODXBuddy\\Processors\\Settings\\Update',
                                                         field: 'cache_alias_map',
-                                                        value: value
+                                                        value:  value ? '1' : '0'
                                                     },
                                                 });
                                             }
