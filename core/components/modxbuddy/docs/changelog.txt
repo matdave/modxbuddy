@@ -1,3 +1,7 @@
+1.0.1
+====================
+- Fixing issues with boolean settings in MODX 3
+
 1.0.0
 ====================
 - Initial release
