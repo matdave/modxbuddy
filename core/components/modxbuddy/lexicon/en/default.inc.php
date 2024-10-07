@@ -37,3 +37,5 @@ $_lang['setting_modxbuddy.upload_resize'] = 'Resize Uploads';
 $_lang['setting_modxbuddy.upload_resize_desc'] = 'Resize images on upload if over the max image dimensions.';
 $_lang['setting_modxbuddy.disable_warnings'] = 'Disable Warnings';
 $_lang['setting_modxbuddy.disable_warnings_desc'] = 'Disable PHP warnings and notices.';
+$_lang['setting_modxbuddy.image_resize_quality'] = 'Image Resize Quality';
+$_lang['setting_modxbuddy.image_resize_quality_desc'] = 'Quality of resized images. 0-100.';

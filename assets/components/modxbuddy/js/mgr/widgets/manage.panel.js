@@ -219,6 +219,34 @@ modxbuddy.panel.Manage = function (config) {
                                             }
                                         }
                                     }, {
+                                        xtype: 'numberfield',
+                                        fieldLabel: _('setting_modxbuddy.image_resize_quality_desc') + ' <i style="font-weight: normal">(' + _('setting_modxbuddy.image_resize_max_dimension') + ')</i>',
+                                        name: 'modxbuddy.image_resize_quality',
+                                        cls: parseInt(MODx.config['modxbuddy.image_resize_quality']) > 0 ? 'valid' : 'invalid',
+                                        value: parseInt(MODx.config['modxbuddy.image_resize_quality']),
+                                        allowNegative: false,
+                                        allowDecimals: false,
+                                        maxValue: 100,
+                                        listeners: {
+                                            'change': function (field, value) {
+                                                if (value > 0) {
+                                                    field.removeClass('invalid');
+                                                    field.addClass('valid');
+                                                } else {
+                                                    field.removeClass('valid');
+                                                    field.addClass('invalid');
+                                                }
+                                                MODx.Ajax.request({
+                                                    url: modxbuddy.config.connectorUrl,
+                                                    params: {
+                                                        action: 'MODXBuddy\\Processors\\Settings\\Update',
+                                                        field: 'modxbuddy.image_resize_quality',
+                                                        value: value
+                                                    },
+                                                });
+                                            }
+                                        }
+                                    }, {
                                         xtype: 'modxbuddy-combo-sessionmanager',
                                         fieldLabel: _('modxbuddy.setting_session_handler_class') + ' <i style="font-weight: normal">(' + _('setting_session_handler_class') + ')</i>',
                                         name: 'session_handler_class',

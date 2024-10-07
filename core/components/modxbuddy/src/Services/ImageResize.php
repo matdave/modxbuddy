@@ -39,6 +39,7 @@ class ImageResize
         }
         // max number of pixels wide or high
         $maxDimension = $this->modx->getOption('modxbuddy.image_resize_max_dimension', null, 1920);
+        $quality = (int) $this->modx->getOption('modxbuddy.image_resize_quality', null, 70);
         $path = !empty($directory)
             ? $source->sanitizePath(
                 $directory . DIRECTORY_SEPARATOR . ltrim($file['name'], DIRECTORY_SEPARATOR)
@@ -77,6 +78,7 @@ class ImageResize
                     }
                 }
             }
+            $this->imagick->setImageCompressionQuality($quality);
             try {
                 $filesystem->write($path, $this->imagick->getImageBlob());
                 return true;

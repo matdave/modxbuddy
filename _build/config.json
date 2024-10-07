@@ -1,6 +1,6 @@
 {
   "name": "MODXBuddy",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "lowCaseName": "modxbuddy",
   "description": "Helper tool for MODX",
   "author": "matdave",
@@ -38,6 +38,11 @@
         "key": "image_resize_max_dimension",
         "value": "1920",
         "type": "number"
+      },
+      {
+        "key": "image_resize_quality",
+        "value": "70",
+        "type": "number"
       }
     ],
     "elements": {
@@ -48,7 +53,8 @@
               "events": [
                 "OnFileManagerBeforeUpload",
                 "OnFileManagerUpload",
-                "OnMODXInit"
+                "OnMODXInit",
+                "FredOnElfinderRoots"
               ]
           }
       ]
