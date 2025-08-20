@@ -22,6 +22,7 @@ class ImageResize
         }
         // max number of pixels wide or high
         $maxDimension = $this->modx->getOption('modxbuddy.image_resize_max_dimension', null, 1920);
+        $quality = (int) $this->modx->getOption('modxbuddy.image_resize_quality', null, 70);
         $path = rtrim($directory, '/') .'/'. ltrim($file['name'], '/');
         $content = $source->getObjectContents($path);
         if (!empty($content['content'])) {
@@ -57,6 +58,11 @@ class ImageResize
                     }
                 }
             }
+            $this->imagick->setImageCompressionQuality($quality);
+
+            // remove EXIF data
+            $this->imagick->stripImage();
+
             return $source->updateObject($path, $this->imagick->getImageBlob());
         }
         return false;

@@ -79,6 +79,10 @@ class ImageResize
                 }
             }
             $this->imagick->setImageCompressionQuality($quality);
+
+            // remove EXIF data
+            $this->imagick->stripImage();
+
             try {
                 $filesystem->write($path, $this->imagick->getImageBlob());
                 return true;
