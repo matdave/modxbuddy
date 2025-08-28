@@ -1,3 +1,8 @@
+1.0.3
+====================
+- Remove image EXIF on upload
+- Improved ability to disable PHP warnings
+
 1.0.2
 ====================
 - Add image resizing for Fred
