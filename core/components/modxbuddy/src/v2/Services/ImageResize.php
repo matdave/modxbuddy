@@ -15,6 +15,9 @@ class ImageResize
         $this->imagick = new Imagick();
     }
 
+    /**
+     * @throws \ImagickException
+     */
     public function resize(\modMediaSource $source, $directory, $file)
     {
         if ($file['type'] != "image/jpeg" && $file['type'] != "image/png") {

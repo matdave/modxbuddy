@@ -25,17 +25,22 @@ class OnFileManagerUpload extends Event
 
         if (!empty($files)) {
             $filesystem = $source->getFilesystem();
-            $imageResize = new ImageResize($this->modx);
+            try {
+                $imageResize = new ImageResize($this->modx);
+            } catch (\Exception $e) {
+                $this->modx->log(xPDO::LOG_LEVEL_ERROR, 'MODXBuddy: ' . $e->getMessage());
+                return false;
+            }
             foreach ($files as $file) {
                 // Resize images
                 try {
                     $imageResize->resize($source, $directory, $file, $filesystem);
-                } catch (FilesystemException $e) {
+                } catch (FilesystemException|\ImagickException $e) {
                     $this->modx->log(xPDO::LOG_LEVEL_ERROR, 'MODXBuddy: ' . $e->getMessage());
-                } catch (\ImagickException $e) {
-                    $this->modx->log(xPDO::LOG_LEVEL_ERROR, 'MODXBuddy: ' . $e->getMessage());
+                    return false;
                 }
             }
         }
+        return true;
     }
 }

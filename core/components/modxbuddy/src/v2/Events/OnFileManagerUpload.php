@@ -22,13 +22,22 @@ class OnFileManagerUpload extends Event
         }
 
         if (!empty($files)) {
-            $imageResize = new ImageResize($this->modx);
+            try {
+                $imageResize = new ImageResize($this->modx);
+            } catch (\Exception $e) {
+                $this->modx->log(\xPDO::LOG_LEVEL_ERROR, 'MODXBuddy: ' . $e->getMessage());
+                return false;
+            }
             foreach ($files as $file) {
                 // Resize images
-                $imageResize->resize($source, $directory, $file);
+                try {
+                    $imageResize->resize($source, $directory, $file);
+                } catch (\ImagickException $e) {
+                    $this->modx->log(\xPDO::LOG_LEVEL_ERROR,  'MODXBuddy: ' . $e->getMessage());
+                    return false;
+                }
             }
-        } else {
-            $this->modx->log(\xPDO::LOG_LEVEL_ERROR, 'MODXBuddy: no files uploaded');
         }
+        return true;
     }
 }

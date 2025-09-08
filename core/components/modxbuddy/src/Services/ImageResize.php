@@ -13,9 +13,15 @@ class ImageResize
 
     private $modx;
 
+    /**
+     * @throws \Exception
+     */
     public function __construct($modx)
     {
         $this->modx = $modx;
+        if (!class_exists('Imagick')) {
+            throw new \Exception('Imagick extension is not installed');
+        }
         $this->imagick = new Imagick();
     }
 

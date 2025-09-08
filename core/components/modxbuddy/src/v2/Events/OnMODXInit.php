@@ -8,7 +8,7 @@ class OnMODXInit extends Event
 {
     public function run()
     {
-        $disableWarnings = $this->modx->getOption('modxbuddy.disable_warnings', null, true);
+        $disableWarnings = $this->modx->getOption('modxbuddy.disable_warnings', $this->modx->config, true);
         if ($disableWarnings) {
             error_reporting(E_ALL & ~E_NOTICE & ~E_WARNING & ~E_DEPRECATED);
         }
