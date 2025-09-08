@@ -220,7 +220,7 @@ modxbuddy.panel.Manage = function (config) {
                                         }
                                     }, {
                                         xtype: 'numberfield',
-                                        fieldLabel: _('setting_modxbuddy.image_resize_quality_desc') + ' <i style="font-weight: normal">(' + _('setting_modxbuddy.image_resize_max_dimension') + ')</i>',
+                                        fieldLabel: _('setting_modxbuddy.image_resize_quality_desc') + ' <i style="font-weight: normal">(' + _('setting_modxbuddy.image_resize_quality') + ')</i>',
                                         name: 'modxbuddy.image_resize_quality',
                                         cls: parseInt(MODx.config['modxbuddy.image_resize_quality']) > 0 ? 'valid' : 'invalid',
                                         value: parseInt(MODx.config['modxbuddy.image_resize_quality']),
