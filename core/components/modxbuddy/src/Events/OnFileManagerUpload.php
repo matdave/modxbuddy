@@ -12,7 +12,7 @@ class OnFileManagerUpload extends Event
     public function run()
     {
         $canResize = $this->modx->getOption('modxbuddy.upload_resize', $this->scriptProperties, true);
-        if (!$canResize) {
+        if (!$canResize && class_exists('Imagick')) {
             return true;
         }
         $files = $this->scriptProperties['files'];

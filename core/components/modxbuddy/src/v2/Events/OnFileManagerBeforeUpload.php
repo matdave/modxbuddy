@@ -10,7 +10,7 @@ class OnFileManagerBeforeUpload extends Event
     public function run()
     {
         $canScan = $this->modx->getOption('modxbuddy.upload_scan', $this->scriptProperties, true);
-        if (!$canScan) {
+        if (!$canScan && class_exists('Imagick')) {
             return true;
         }
         $file = $this->scriptProperties['file'];
