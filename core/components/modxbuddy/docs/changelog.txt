@@ -1,3 +1,7 @@
+1.0.5
+====================
+- Fred not fixing uploads on MODX 2.x
+
 1.0.4
 ====================
 - Add more handling and checks for image upload failures
