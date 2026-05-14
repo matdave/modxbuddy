@@ -88,9 +88,17 @@ class ImageResize
 
             // remove EXIF data
             $this->imagick->stripImage();
-
+            $convert = $this->modx->getOption('modxbuddy.image_convert', [], true);
             try {
+                $newName = null;
+                if ($convert) {
+                    $this->imagick->setImageFormat('webp');
+                    $newName = preg_replace('/\.(jp|pn)(e?)g$/i', '.webp', $file['name']);
+                }
                 $filesystem->write($path, $this->imagick->getImageBlob());
+                if ($newName) {
+                    $source->renameObject($path, $newName);
+                }
                 return true;
             } catch (\Exception $e) {
                 $this->modx->log(xPDO::LOG_LEVEL_ERROR, 'Error resizing image: ' . $e->getMessage());
@@ -100,5 +108,4 @@ class ImageResize
         }
         return false;
     }
-
 }

@@ -1,6 +1,6 @@
 {
   "name": "MODXBuddy",
-  "version": "1.0.5",
+  "version": "1.1.0",
   "lowCaseName": "modxbuddy",
   "description": "Helper tool for MODX",
   "author": "matdave",
@@ -43,6 +43,11 @@
         "key": "image_resize_quality",
         "value": "70",
         "type": "number"
+      },
+      {
+        "key": "image_convert",
+        "value": "1",
+        "type" : "combo-boolean"
       }
     ],
     "elements": {

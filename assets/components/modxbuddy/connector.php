@@ -40,7 +40,6 @@ if ($action) {
     $last = array_pop($actionArray);
     $actionArray[] = str_replace('_', '', $last);
     $action = implode('/', $actionArray);
-    $action = $action;
 }
 
 $modx->request->handleRequest(

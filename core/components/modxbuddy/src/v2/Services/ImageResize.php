@@ -65,8 +65,19 @@ class ImageResize
 
             // remove EXIF data
             $this->imagick->stripImage();
-
-            return $source->updateObject($path, $this->imagick->getImageBlob());
+            $convert = $this->modx->getOption('modxbuddy.image_convert', [], true);
+            $newName = null;
+            if ($convert) {
+                $this->imagick->setImageFormat('webp');
+                $newName = $this->modx->filterPathSegment($file['name']);
+                $newName = preg_replace('/\.(jp|pn)(e?)g$/i', '.webp', $newName);
+                $file['name'] = $newName;
+            }
+            $source->updateObject($path, $this->imagick->getImageBlob());
+            if ($newName) {
+                $source->renameObject($path, $newName);
+            }
+            return true;
         }
         return false;
     }

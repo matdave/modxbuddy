@@ -175,17 +175,42 @@ modxbuddy.panel.Manage = function (config) {
                                         listeners: {
                                             'change': function (field, value) {
                                                 if (value === '1' || value === true) {
-                                                    field.removeClass('valid');
-                                                    field.addClass('invalid');
-                                                } else {
                                                     field.removeClass('invalid');
                                                     field.addClass('valid');
+                                                } else {
+                                                    field.removeClass('valid');
+                                                    field.addClass('invalid');
                                                 }
                                                 MODx.Ajax.request({
                                                     url: modxbuddy.config.connectorUrl,
                                                     params: {
                                                         action: 'MODXBuddy\\Processors\\Settings\\Update',
                                                         field: 'modxbuddy.upload_resize',
+                                                        value:  value ? '1' : '0'
+                                                    },
+                                                });
+                                            }
+                                        }
+                                    },{
+                                        xtype: 'combo-boolean',
+                                        fieldLabel: _('setting_modxbuddy.image_convert_desc') + ' <i style="font-weight: normal">(' + _('setting_modxbuddy.image_convert') + ')</i>',
+                                        name: 'modxbuddy.image_convert',
+                                        cls: MODx.config['modxbuddy.image_convert'] === '1' ? 'valid' : 'invalid',
+                                        value: MODx.config['modxbuddy.image_convert'],
+                                        listeners: {
+                                            'change': function (field, value) {
+                                                if (value === '1' || value === true) {
+                                                    field.removeClass('invalid');
+                                                    field.addClass('valid');
+                                                } else {
+                                                    field.removeClass('valid');
+                                                    field.addClass('invalid');
+                                                }
+                                                MODx.Ajax.request({
+                                                    url: modxbuddy.config.connectorUrl,
+                                                    params: {
+                                                        action: 'MODXBuddy\\Processors\\Settings\\Update',
+                                                        field: 'modxbuddy.image_convert',
                                                         value:  value ? '1' : '0'
                                                     },
                                                 });
