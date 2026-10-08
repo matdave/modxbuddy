@@ -5,7 +5,7 @@
     }
   },
   "require": {
-    "php": ">=7.4",
+    "php": ">=8.1",
     "scr34m/php-malware-scanner": "^1.0",
     "matdave/modxpackage": "^1.0"
   },
@@ -14,9 +14,7 @@
   },
   "config": {
     "platform": {
-      "php": "7.4"
+      "php": "8.1"
     }
-  },
-  "minimum-stability": "dev",
-  "prefer-stable": true
+  }
 }
