@@ -23,7 +23,7 @@ class FredOnElfinderRoots extends Event
             'maxHeight'      => $maxDimension,
             'quality'        => $quality,
             'preserveExif'   => false,
-            'forceEffect'    => false,
+            'forceEffect'    => true,
             'targetType'     => IMG_GIF|IMG_JPG|IMG_PNG|IMG_WBMP,
             'offDropWith'    => null,
             'onDropWith'     => null
