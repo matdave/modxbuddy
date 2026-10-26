@@ -4,6 +4,7 @@ namespace MODXBuddy\Services;
 
 use Imagick;
 use League\Flysystem\FilesystemException;
+use MODX\Revolution\Sources\modFileMediaSource;
 use MODX\Revolution\Sources\modMediaSource;
 use xPDO\xPDO;
 
@@ -44,7 +45,7 @@ class ImageResize
             }
         }
         // max number of pixels wide or high
-        $maxDimension = $this->modx->getOption('modxbuddy.image_resize_max_dimension', null, 1920);
+        $maxDimension = (int) $this->modx->getOption('modxbuddy.image_resize_max_dimension', null, 1920);
         $quality = (int) $this->modx->getOption('modxbuddy.image_resize_quality', null, 70);
         $path = !empty($directory)
             ? $source->sanitizePath(
@@ -82,6 +83,9 @@ class ImageResize
                     if ($height > $width) {
                         $this->imagick->resizeImage(0, $maxDimension, Imagick::FILTER_LANCZOS, 1);
                     }
+                    if ($height === $width) {
+                        $this->imagick->resizeImage($maxDimension, $maxDimension, Imagick::FILTER_LANCZOS, 1);
+                    }
                 }
             }
             $this->imagick->setImageCompressionQuality($quality);
@@ -91,6 +95,17 @@ class ImageResize
             $convert = $this->modx->getOption('modxbuddy.image_convert', [], true);
             try {
                 $newName = null;
+                // disable if source class is not modFileMediaSource and MODX Version < 3.3.0
+                if (empty($this->modx->version)) {
+                    $this->modx->getVersionData();
+                }
+                $version = $this->modx->version['full_version'] ?? '0.0.0';
+                if (
+                    $source->get('class_key') !== modFileMediaSource::class &&
+                    version_compare($version, '3.3.0', '<')
+                ) {
+                    $convert = false;
+                }
                 if ($convert) {
                     $this->imagick->setImageFormat('webp');
                     $newName = preg_replace('/\.(jp|pn)(e?)g$/i', '.webp', $file['name']);

@@ -15,6 +15,13 @@
   "config": {
     "platform": {
       "php": "8.1"
+    },
+    "policy": {
+      "advisories": {
+        "ignore": [
+          "modx/revolution"
+        ]
+      }
     }
   }
 }

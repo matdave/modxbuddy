@@ -24,7 +24,7 @@ class ImageResize
             return false;
         }
         // max number of pixels wide or high
-        $maxDimension = $this->modx->getOption('modxbuddy.image_resize_max_dimension', null, 1920);
+        $maxDimension = (int) $this->modx->getOption('modxbuddy.image_resize_max_dimension', null, 1920);
         $quality = (int) $this->modx->getOption('modxbuddy.image_resize_quality', null, 70);
         $path = rtrim($directory, '/') .'/'. ltrim($file['name'], '/');
         $content = $source->getObjectContents($path);
@@ -59,6 +59,9 @@ class ImageResize
                     if ($height > $width) {
                         $this->imagick->resizeImage(0, $maxDimension, Imagick::FILTER_LANCZOS, 1);
                     }
+                    if ($height === $width) {
+                        $this->imagick->resizeImage($maxDimension, $maxDimension, Imagick::FILTER_LANCZOS, 1);
+                    }
                 }
             }
             $this->imagick->setImageCompressionQuality($quality);
@@ -67,6 +70,10 @@ class ImageResize
             $this->imagick->stripImage();
             $convert = $this->modx->getOption('modxbuddy.image_convert', [], true);
             $newName = null;
+            // disable if source class is not modFileMediaSource
+            if ($source->get('class_key') !== 'sources.modFileMediaSource') {
+                $convert = false;
+            }
             if ($convert) {
                 $this->imagick->setImageFormat('webp');
                 $newName = $this->modx->filterPathSegment($file['name']);

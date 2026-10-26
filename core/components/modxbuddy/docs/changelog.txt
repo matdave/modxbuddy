@@ -1,3 +1,8 @@
+1.1.1
+====================
+- Don't convert webp if S3
+- Resize square images
+
 1.1.0
 ====================
 - Add ability to convert images to webp
